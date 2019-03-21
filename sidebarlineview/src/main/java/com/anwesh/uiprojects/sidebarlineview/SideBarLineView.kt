@@ -209,4 +209,13 @@ class SideBarLineView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : SideBarLineView {
+            val view : SideBarLineView = SideBarLineView(activity)
+            activity.setContentView(view)
+            return view 
+        }
+    }
 }
