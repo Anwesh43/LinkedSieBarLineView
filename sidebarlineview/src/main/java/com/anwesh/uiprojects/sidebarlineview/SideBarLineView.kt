@@ -186,4 +186,26 @@ class SideBarLineView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : SideBarLineView) {
+
+        private val animator : Animator = Animator(view)
+        private var sbl : SideBarLine = SideBarLine(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            sbl.draw(canvas, paint)
+            animator.animate {
+                sbl.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            sbl.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
